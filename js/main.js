@@ -55,28 +55,35 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Contact form submission (via FormSubmit — no backend required)
-  var contactForm = document.querySelector("#contact-form");
-  var formStatus = document.querySelector("#form-status");
+  // Form submission (via FormSubmit — no backend required)
+  function wireForm(formId, statusId, successMessage) {
+    var form = document.querySelector(formId);
+    var statusEl = document.querySelector(statusId);
+    if (!form) return;
 
-  if (contactForm) {
-    contactForm.addEventListener("submit", function (event) {
+    function showStatus(message, type) {
+      if (!statusEl) return;
+      statusEl.textContent = message;
+      statusEl.className = "form-status visible " + type;
+    }
+
+    form.addEventListener("submit", function (event) {
       event.preventDefault();
 
-      var submitBtn = contactForm.querySelector("button[type='submit']");
+      var submitBtn = form.querySelector("button[type='submit']");
       var originalLabel = submitBtn.textContent;
       submitBtn.textContent = "Sending...";
       submitBtn.disabled = true;
 
-      fetch(contactForm.action, {
+      fetch(form.action, {
         method: "POST",
-        body: new FormData(contactForm),
+        body: new FormData(form),
         headers: { Accept: "application/json" }
       })
         .then(function (response) {
           if (response.ok) {
-            showStatus("Thank you — your message has been sent. Mara will reply within 1–2 business days.", "success");
-            contactForm.reset();
+            showStatus(successMessage, "success");
+            form.reset();
           } else {
             showStatus("Something went wrong. Please email us directly at mkphotography881@gmail.com.", "error");
           }
@@ -91,9 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function showStatus(message, type) {
-    if (!formStatus) return;
-    formStatus.textContent = message;
-    formStatus.className = "form-status visible " + type;
-  }
+  wireForm("#contact-form", "#form-status", "Thank you — your message has been sent. Mara will reply within 1–2 business days.");
+  wireForm("#booking-form", "#booking-status", "Thank you — your request has been received. Mara personally confirms every booking within 24 hours.");
 });

@@ -4,15 +4,17 @@
    =========================================================== */
 
 :root {
-  --color-bg: #faf7f2;
-  --color-bg-alt: #f1ece3;
-  --color-text: #2b2925;
+  --color-bg: #faf8f4;
+  --color-bg-alt: #f2ede1;
+  --color-text: #16140f;
   --color-text-soft: #6b6459;
-  --color-accent: #a9825c;
-  --color-accent-dark: #8a6845;
-  --color-line: #e2dacd;
+  --color-accent: #b8923f;
+  --color-accent-dark: #93752f;
+  --color-gold-soft: #ddc48a;
+  --color-black: #0b0a08;
+  --color-line: #e6ddc8;
   --color-white: #ffffff;
-  --font-display: "Playfair Display", "Georgia", serif;
+  --font-display: "Cormorant Garamond", "Playfair Display", "Georgia", serif;
   --font-body: "Jost", "Helvetica Neue", Arial, sans-serif;
   --max-width: 1200px;
   --transition: 0.35s ease;
@@ -53,9 +55,33 @@ ul {
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.01em;
   margin: 0 0 0.6em;
+}
+
+/* Gold divider ornament */
+.divider-gold {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 28px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  position: relative;
+}
+
+.divider-gold::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: var(--color-accent);
+}
+
+.divider-gold.left {
+  margin: 0 0 28px;
 }
 
 p {
@@ -168,6 +194,24 @@ p {
 .nav-links a:hover,
 .nav-links a.active {
   border-bottom-color: currentColor;
+}
+
+.nav-links a.nav-cta {
+  background: var(--color-accent);
+  color: var(--color-black);
+  padding: 9px 22px;
+  border-bottom: none;
+  transition: background var(--transition), color var(--transition);
+}
+
+.nav-links a.nav-cta:hover {
+  background: var(--color-accent-dark);
+  border-bottom: none;
+  color: var(--color-white);
+}
+
+.site-header.transparent-nav:not(.is-solid) .nav-links a.nav-cta {
+  color: var(--color-black);
 }
 
 .nav-toggle {
@@ -630,6 +674,94 @@ section {
   color: var(--color-accent);
 }
 
+/* Booking page: steps */
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  text-align: center;
+}
+
+.step-number {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  color: var(--color-accent);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.step h3 {
+  font-size: 1.3rem;
+}
+
+.step p {
+  color: var(--color-text-soft);
+  font-size: 0.92rem;
+}
+
+/* Booking page: packages */
+
+.package-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.package-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  padding: 40px 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.package-card:hover,
+.package-card.selected {
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+}
+
+.package-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.package-card .package-note {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.62rem;
+  color: var(--color-accent);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.package-card ul {
+  text-align: left;
+  margin: 0 0 24px;
+}
+
+.package-card li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+}
+
+.package-card li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+}
+
+.package-card .btn {
+  width: 100%;
+  font-size: 0.68rem;
+}
+
 /* Contact page */
 
 .contact-wrap {
@@ -759,7 +891,7 @@ section {
 /* ---------- Footer ---------- */
 
 .site-footer {
-  background: #211f1c;
+  background: var(--color-black);
   color: #d8d2c6;
   padding: 70px 0 30px;
 }
@@ -870,6 +1002,11 @@ section {
     grid-template-columns: 1fr;
   }
 
+  .steps-grid,
+  .package-grid {
+    grid-template-columns: 1fr;
+  }
+
   .form-row {
     grid-template-columns: 1fr;
     gap: 0;
@@ -910,6 +1047,11 @@ section {
 
   .site-header.transparent-nav .nav-links a {
     color: var(--color-text) !important;
+  }
+
+  .nav-links a.nav-cta {
+    display: inline-block;
+    margin-top: 10px;
   }
 
   section {
