@@ -216,6 +216,82 @@ p {
   background: linear-gradient(180deg, rgba(20, 18, 15, 0.35) 0%, rgba(20, 18, 15, 0.45) 60%, rgba(20, 18, 15, 0.6) 100%);
 }
 
+.siri-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  mix-blend-mode: screen;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.siri-glow span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  will-change: transform;
+}
+
+.siri-glow .b1 {
+  width: 46vw;
+  height: 46vw;
+  left: 12%;
+  top: 18%;
+  background: radial-gradient(circle, #f0c987 0%, rgba(240, 201, 135, 0) 70%);
+  animation: siriDrift1 16s ease-in-out infinite;
+}
+
+.siri-glow .b2 {
+  width: 38vw;
+  height: 38vw;
+  right: 8%;
+  top: 30%;
+  background: radial-gradient(circle, #e0906d 0%, rgba(224, 144, 109, 0) 70%);
+  animation: siriDrift2 19s ease-in-out infinite;
+}
+
+.siri-glow .b3 {
+  width: 34vw;
+  height: 34vw;
+  left: 32%;
+  bottom: 8%;
+  background: radial-gradient(circle, #b98bc9 0%, rgba(185, 139, 201, 0) 70%);
+  animation: siriDrift3 22s ease-in-out infinite;
+}
+
+.siri-glow .b4 {
+  width: 30vw;
+  height: 30vw;
+  right: 22%;
+  bottom: -4%;
+  background: radial-gradient(circle, #7fb2ad 0%, rgba(127, 178, 173, 0) 70%);
+  animation: siriDrift1 24s ease-in-out infinite reverse;
+}
+
+@keyframes siriDrift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(6vw, -4vh) scale(1.15); }
+  66% { transform: translate(-4vw, 5vh) scale(0.9); }
+}
+
+@keyframes siriDrift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-8vw, 6vh) scale(1.2); }
+}
+
+@keyframes siriDrift3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(5vw, -6vh) scale(1.1); }
+  75% { transform: translate(-6vw, -2vh) scale(0.95); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .siri-glow span {
+    animation: none;
+  }
+}
+
 .hero-content {
   position: relative;
   z-index: 2;
